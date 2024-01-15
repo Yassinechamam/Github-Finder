@@ -6,17 +6,12 @@ import axios from "axios";
 
 function UserResults() {
   const { loading, users } = useContext(GithubContext);
-  const GITHUB_TOKEN = `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`;
   const [initials, setInitials] = useState([]);
 
   useEffect(() => {
     const fetchGitHubUsers = async () => {
       try {
-        const response = await axios.get("https://api.github.com/users", {
-          headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
-          },
-        });
+        const response = await axios.get("https://api.github.com/users");
         const data = response.data;
         setInitials(data);
       } catch (error) {
