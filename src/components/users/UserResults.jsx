@@ -6,14 +6,18 @@ import axios from "axios";
 
 function UserResults() {
   const { loading, users } = useContext(GithubContext);
-
+  const GITHUB_TOKEN = `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`;
   const [initials, setInitials] = useState([]);
 
   useEffect(() => {
     const fetchGitHubUsers = async () => {
       try {
-        const response = await axios.get("https://api.github.com/users");
-        const data = response.data.slice(0, 21);
+        const response = await axios.get("https://api.github.com/users", {
+          headers: {
+            Authorization: `token ${GITHUB_TOKEN}`,
+          },
+        });
+        const data = response.data;
         setInitials(data);
       } catch (error) {
         console.error("Error fetching GitHub users:", error);

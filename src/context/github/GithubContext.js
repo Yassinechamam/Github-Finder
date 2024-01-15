@@ -5,6 +5,7 @@ import axios from "axios";
 const GithubContext = createContext();
 
 const GITHUB_URL = `https://api.github.com`;
+const GITHUB_TOKEN = `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`;
 
 export const GithubProvider = ({ children }) => {
   const initialState = {
@@ -24,7 +25,12 @@ export const GithubProvider = ({ children }) => {
       q: text,
     });
 
-    const response = await axios.get(`${GITHUB_URL}/search/users?${params}`);
+    const response = await axios.get(`${GITHUB_URL}/search/users?${params}`, {
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+      },
+    });
+
     const { items } = response.data;
 
     dispatch({
@@ -36,7 +42,11 @@ export const GithubProvider = ({ children }) => {
   const getUser = async (login) => {
     setLoading();
 
-    const response = await axios.get(`${GITHUB_URL}/users/${login}`);
+    const response = await axios.get(`${GITHUB_URL}/users/${login}`, {
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+      },
+    });
 
     if (response.status === 404) {
       window.location = "/notfound";
@@ -59,7 +69,12 @@ export const GithubProvider = ({ children }) => {
     });
 
     const response = await axios.get(
-      `${GITHUB_URL}/users/${login}/repos?${params}`
+      `${GITHUB_URL}/users/${login}/repos?${params}`,
+      {
+        headers: {
+          Authorization: `token ${GITHUB_TOKEN}`,
+        },
+      }
     );
     const item = response.data;
 
