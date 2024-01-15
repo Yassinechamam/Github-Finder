@@ -5,7 +5,7 @@ import axios from "axios";
 const GithubContext = createContext();
 
 const GITHUB_URL = `https://api.github.com`;
-const GITHUB_TOKEN = `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`;
+const GITHUB_TOKEN = `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`;
 
 export const GithubProvider = ({ children }) => {
   const initialState = {

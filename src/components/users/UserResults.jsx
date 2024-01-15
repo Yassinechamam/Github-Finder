@@ -6,7 +6,7 @@ import axios from "axios";
 
 function UserResults() {
   const { loading, users } = useContext(GithubContext);
-  const GITHUB_TOKEN = `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`;
+  const GITHUB_TOKEN = `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`;
   const [initials, setInitials] = useState([]);
 
   useEffect(() => {
